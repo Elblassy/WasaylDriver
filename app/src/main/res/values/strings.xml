@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">WasaylDriver</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Orders</string>
+    <string name="title_Active">Active orders</string>
+
+    <string name="user_name">Username</string>
+    <string name="phone_number">Mobile number</string>
+    <string name="verify_phone">Please type the verification code sent to</string>
+    <string name="verify">Verify</string>
+    <string name="work">Work anytime if you are available</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="Cities">
+        <item>Cairo</item>
+        <item>Alexandria</item>
+        <item>Gizeh</item>
+        <item>Ismailia</item>
+        <item>Port Said</item>
+        <item>Suez</item>
+        <item>Sohag</item>
+        <item>Luxor</item>
+        <item>Al-Mansura</item>
+        <item>El-Mahalla El-Kubra</item>
+        <item>Tanta</item>
+        <item>Asyut</item>
+        <item>Fayyum</item>
+        <item>Zagazig</item>
+        <item>Aswan</item>
+        <item>Damietta</item>
+        <item>Damanhur</item>
+        <item>al-Minya</item>
+        <item>Beni Suef</item>
+        <item>Qena</item>
+        <item>Hurghada</item>
+        <item>6th of October City</item>
+        <item>Shibin El Kom</item>
+        <item>Banha</item>
+        <item>Kafr el-Sheikh</item>
+        <item>Arish</item>
+        <item>Mallawi</item>
+        <item>10th of Ramadan City</item>
+        <item>Bilbais</item>
+        <item>Marsa Matruh</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#24B4A5</color>
+    <color name="colorPrimaryDark">#24B4A5</color>
+    <color name="colorAccent">#FDD741</color>
+    <color name="colorAccent2">#166D8A</color>
+
+
+    <color name="transparent">#00000000</color>
+    <color name="bg_msg_you">#15a89c</color>
+    <color name="bg_msg_from">#9E9E9E</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_inactive">#4c4c4c</color>
+
+    <!-- dots active colors -->
+    <color name="dot_active">#e5e5e5</color>
+    <color name="material_blueA200">#045FB4</color>
+
+</resources>
