@@ -76,17 +76,17 @@ public class OrdersAdapter extends BaseAdapter {
 
         holder.address.setText(orders.getTo());
         holder.details.setText(orders.getPlaceName());
-        holder.card.setOnClickListener(v -> {
-//            String token = orders.getToken();
-//            Intent intent = new Intent(context, SpeakToClient.class);
-//            intent.putExtra("token", token);
-//            intent.putExtra("userName",orders.getUserName());
-//            intent.putExtra("phoneNumber",orders.getPhoneNumber());
-//            intent.putExtra("placeName",orders.getPlaceName());
-//            context.startActivity(intent);
-
-            myCustomAlertDialog(orders.getPlaceName(), orders.getPhoneNumber());
-        });
+//        holder.card.setOnClickListener(v -> {
+////            String token = orders.getToken();
+////            Intent intent = new Intent(context, SpeakToClient.class);
+////            intent.putExtra("token", token);
+////            intent.putExtra("userName",orders.getUserName());
+////            intent.putExtra("phoneNumber",orders.getPhoneNumber());
+////            intent.putExtra("placeName",orders.getPlaceName());
+////            context.startActivity(intent);
+//
+//            myCustomAlertDialog(orders.getPlaceName(), orders.getPhoneNumber());
+//        });
 
         return v;
     }

@@ -1,6 +1,7 @@
 package com.elblasy.wasayldriver.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.elblasy.wasayldriver.R;
+import com.elblasy.wasayldriver.TrackingOrder;
 import com.elblasy.wasayldriver.adapter.OrdersAdapter;
 import com.elblasy.wasayldriver.model.Orders;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
 
 
 public class OrdersFragment extends Fragment {
@@ -37,6 +38,7 @@ public class OrdersFragment extends Fragment {
     private ArrayList<Orders> ordersList;
     DatabaseReference databaseReference;
     OrdersAdapter ordersAdapter;
+    ArrayList<String> pushedKeys;
 
 
     private OnFragmentInteractionListener mListener;
@@ -62,6 +64,7 @@ public class OrdersFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         ordersList = new ArrayList<>();
+        pushedKeys = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("orders");
 
@@ -84,8 +87,10 @@ public class OrdersFragment extends Fragment {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Orders orders = dataSnapshot1.getValue(Orders.class);
                     if (orders != null) {
-                        if (orders.isActive() && orders.getDriversID().equals("unknown"))
+                        if (orders.isActive() && orders.getDriversID().equals("unknown")) {
                             ordersList.add(orders);
+                            pushedKeys.add(dataSnapshot1.getKey());
+                        }
 
                     }
                     ordersAdapter.notifyDataSetChanged();
@@ -98,6 +103,13 @@ public class OrdersFragment extends Fragment {
             }
         };
         databaseReference.addValueEventListener(valueEventListener);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+
+            Intent intent = new Intent(rootView.getContext(), TrackingOrder.class);
+            intent.putExtra("key",pushedKeys.get(position));
+            startActivity(intent);
+        });
         return rootView;
     }
 
