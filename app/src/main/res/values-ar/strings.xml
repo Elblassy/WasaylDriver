@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WasaylDriver</string>
+    <string name="choose_profile_image">اختار صورتك الشخصية</string>
+    <string name="title_Active">الطلبات الى شغالة</string>
+    <string name="title_dashboard">"الطلبات "</string>
+    <string name="title_home">الرئيسية</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="verify">تحقق</string>
+    <string name="verify_phone">انتظر حتى يتم ارسال الكود الى الرقم</string>
+    <string name="id_image_button_front">"ارفع وجه صورة بطاقتك الشخصية </string>
+    <string name="id_image_button_back">ارفع ظهر صورة بطاقتك الشخصية </string>
+    <string name="next">التالي</string>
+
+</resources>

@@ -8,12 +8,14 @@
     <string name="phone_number">Mobile number</string>
     <string name="verify_phone">Please type the verification code sent to</string>
     <string name="verify">Verify</string>
-    <string name="work">Work anytime if you are available</string>
+    <string name="work" translatable="false">Work anytime if you are available</string>
 
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_profile_image">Choose image</string>
+    <string name="id_image_button_front">uploud image for your id</string>
+    <string name="id_image_button_back">uploud image for your id</string>
+    <string name="next">next</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="Cities">
         <item>Cairo</item>
         <item>Alexandria</item>

@@ -6,10 +6,13 @@ import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.elblasy.wasayldriver.utiles.LocaleUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,6 +31,12 @@ public class Sign extends AppCompatActivity {
     DatabaseReference users;
     MaterialBetterSpinner spinnerCities;
     List<String> citiesList;
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+
+    public Sign() {
+        LocaleUtils.updateConfig(this);
+    }
 
 
     @Override
@@ -40,6 +49,7 @@ public class Sign extends AppCompatActivity {
         username = findViewById(R.id.user_name);
         button = findViewById(R.id.signin);
         spinnerCities = findViewById(R.id.spinnerCities);
+        radioGroup = findViewById(R.id.radio);
 
         citiesList = new ArrayList<>();
 
@@ -62,25 +72,33 @@ public class Sign extends AppCompatActivity {
             String mCity = spinnerCities.getText().toString();
 
             if (TextUtils.isEmpty(mUserName) || mUserName.length() < 2) {
-                Toast.makeText(getApplicationContext(), "Please enter a valid User Name", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "من فضلك ادخل اسمك صحيح", Toast.LENGTH_LONG).show();
                 return;
             }
 
             if (TextUtils.isEmpty(mPhoneNumber) || mPhoneNumber.length() < 11) {
-                Toast.makeText(getApplicationContext(), "Please enter a valid mobile", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "من فضلك ادخل رقم موبيلك بشكل صحيح", Toast.LENGTH_LONG).show();
                 return;
             }
 
             if (TextUtils.isEmpty(mCity)) {
-                Toast.makeText(getApplicationContext(), "Please select your city", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "من فضلك اختر المدينة التي ستعمل بها", Toast.LENGTH_LONG).show();
                 return;
             }
 
+            if (radioGroup.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(getApplicationContext(), "من فضلك اختار نوع وسيلة النقل", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            int radioID = radioGroup.getCheckedRadioButtonId();
+            radioButton = findViewById(radioID);
 
             Intent intent1 = new Intent(Sign.this, VerifyPhoneNumber.class);
             intent1.putExtra("mobile", mPhoneNumber);
             intent1.putExtra("user", mUserName);
             intent1.putExtra("city", mCity);
+            intent1.putExtra("driver", radioButton.getText());
 
             startActivity(intent1);
 

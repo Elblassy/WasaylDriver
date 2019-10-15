@@ -62,7 +62,7 @@
         app:pinHeight="40dp"
         app:pinLength="6"
         app:cursorVisible="true"
-        app:forceKeyboard="false"
+        app:forceKeyboard="true"
         app:hint="0"
         app:inputType="number"
         app:password="false"

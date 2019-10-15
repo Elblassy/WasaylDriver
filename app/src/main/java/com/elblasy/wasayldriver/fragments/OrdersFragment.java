@@ -27,13 +27,6 @@ import java.util.ArrayList;
 
 public class OrdersFragment extends Fragment {
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
     private ListView listView;
     private ArrayList<Orders> ordersList;
     DatabaseReference databaseReference;
@@ -41,28 +34,16 @@ public class OrdersFragment extends Fragment {
     ArrayList<String> pushedKeys;
 
 
-    private OnFragmentInteractionListener mListener;
 
     public OrdersFragment() {
         // Required empty public constructor
     }
 
-    public static OrdersFragment newInstance(String param1, String param2) {
-        OrdersFragment fragment = new OrdersFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
         ordersList = new ArrayList<>();
         pushedKeys = new ArrayList<>();
 
@@ -104,34 +85,14 @@ public class OrdersFragment extends Fragment {
         };
         databaseReference.addValueEventListener(valueEventListener);
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-
-            Intent intent = new Intent(rootView.getContext(), TrackingOrder.class);
-            intent.putExtra("key",pushedKeys.get(position));
-            startActivity(intent);
-        });
+//        listView.setOnItemClickListener((parent, view, position, id) -> {
+//
+//            Intent intent = new Intent(rootView.getContext(), TrackingOrder.class);
+//            intent.putExtra("key",pushedKeys.get(position));
+//            startActivity(intent);
+//        });
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

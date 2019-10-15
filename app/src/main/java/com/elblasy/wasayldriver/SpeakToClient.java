@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,6 +20,7 @@ import com.elblasy.wasayldriver.adapter.MessageListAdapter;
 import com.elblasy.wasayldriver.fragments.HomeFragment;
 import com.elblasy.wasayldriver.model.Message;
 import com.elblasy.wasayldriver.model.MySingleton;
+import com.elblasy.wasayldriver.utiles.SharedPref;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,12 +100,7 @@ public class SpeakToClient extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         String placeName = intent.getStringExtra("placeName");
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,
-                instanceIdResult -> {
-                    myToken = instanceIdResult.getToken();
-                    Log.e("myToken", myToken);
-
-                });
+        myToken = SharedPref.getSessionValue("Token");
 
         reference = FirebaseDatabase.getInstance().getReference("chats").child(phoneNumber).child(placeName);
 
@@ -117,7 +111,7 @@ public class SpeakToClient extends AppCompatActivity {
                 NOTIFICATION_MESSAGE = editText.getText().toString();
                 NOTIFICATION_TITLE = placeName;
 
-                sendMessage("Driver", "Client", editText.getText().toString());
+                sendMessage(SharedPref.getSessionValue("Name"), "Client", editText.getText().toString());
                 //TOPIC = "/topics/wasayldrivers"; //topic must match with what the receiver subscribed to
 
                 JSONObject notification = new JSONObject();
@@ -148,6 +142,7 @@ public class SpeakToClient extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("token", myToken);
+        hashMap.put("phone_number", SharedPref.getSessionValue("PhoneNumber"));
 
         reference.push().setValue(hashMap);
 
@@ -208,7 +203,7 @@ public class SpeakToClient extends AppCompatActivity {
 
                 if (messages.getSender().matches("Driver")) {
                     messages.setSelf(true);
-                }else {
+                } else {
                     token = messages.getToken();
                 }
 

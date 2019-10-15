@@ -76,7 +76,7 @@ public class OrdersAdapter extends BaseAdapter {
 
         holder.address.setText(orders.getTo());
         holder.details.setText(orders.getPlaceName());
-//        holder.card.setOnClickListener(v -> {
+        holder.card.setOnClickListener(v -> {
 ////            String token = orders.getToken();
 ////            Intent intent = new Intent(context, SpeakToClient.class);
 ////            intent.putExtra("token", token);
@@ -85,8 +85,8 @@ public class OrdersAdapter extends BaseAdapter {
 ////            intent.putExtra("placeName",orders.getPlaceName());
 ////            context.startActivity(intent);
 //
-//            myCustomAlertDialog(orders.getPlaceName(), orders.getPhoneNumber());
-//        });
+            myCustomAlertDialog(orders.getPlaceName(), orders.getPhoneNumber());
+        });
 
         return v;
     }
@@ -106,9 +106,7 @@ public class OrdersAdapter extends BaseAdapter {
         myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         myDialog.setContentView(R.layout.dialog);
 
-        //implement  element in dialog
-        name = myDialog.findViewById(R.id.name);
-        rate = myDialog.findViewById(R.id.rate);
+
         message = myDialog.findViewById(R.id.message);
 
         Button button = myDialog.findViewById(R.id.button);
@@ -120,14 +118,11 @@ public class OrdersAdapter extends BaseAdapter {
 
             HashMap<String, Object> hashMap = new HashMap<>();
 
-            String mNmae = name.getText().toString();
-            String mMessage = message.getText().toString();
+
             int mRate = Integer.parseInt(rate.getText().toString());
 
 
-            hashMap.put("name", mNmae);
-            hashMap.put("message", mMessage);
-            hashMap.put("rat", mRate);
+
 
             reference.push().setValue(hashMap);
 

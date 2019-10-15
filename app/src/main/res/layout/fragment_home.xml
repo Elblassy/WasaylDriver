@@ -64,10 +64,10 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
-                        android:text="Points"
+                        android:text="الايام المتبقية للعمل"
                         android:textAlignment="center"
                         android:textColor="#000"
-                        android:textSize="10pt" />
+                        android:textSize="7pt" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
-                        android:text="Rate"
+                        android:text="تقيمك"
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="10pt" />
@@ -126,7 +126,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
-                        android:text="Orders"
+                        android:text="الطلبات الناجحة"
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="10pt" />
@@ -168,12 +168,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:elevation="8dp"
-            android:src="@drawable/elblasy"
+            android:src="@drawable/ic_person_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline2" />

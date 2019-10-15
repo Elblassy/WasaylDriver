@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.elblasy.wasayldriver.model.User;
+import com.elblasy.wasayldriver.utiles.LocaleUtils;
+import com.elblasy.wasayldriver.utiles.SharedPref;
 import com.goodiebag.pinview.Pinview;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
@@ -21,6 +23,9 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneNumber extends AppCompatActivity {
@@ -29,7 +34,14 @@ public class VerifyPhoneNumber extends AppCompatActivity {
     private Pinview codeInputView;
     private FirebaseAuth mAuth;
     private DatabaseReference mdatabase;
-    private String mobile, name, city;
+    private String mobile, name, city, driver;
+    private SharedPref sharedPref;
+    private int driverVichel;
+
+    public VerifyPhoneNumber() {
+        LocaleUtils.updateConfig(this);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +52,20 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         mdatabase = FirebaseDatabase.getInstance().getReference("users");
         codeInputView = findViewById(R.id.code);
 
+        sharedPref = new SharedPref(this);
+
         Intent intent = getIntent();
         mobile = intent.getStringExtra("mobile");
         name = intent.getStringExtra("user");
         city = intent.getStringExtra("city");
+        driver = intent.getStringExtra("driver");
+
+        assert driver != null;
+        if (driver.matches("نقل خفيف")) {
+            driverVichel = 1;
+        } else {
+            driverVichel = 0;
+        }
 
         final TextView mobileText = findViewById(R.id.mobile);
         mobileText.setText(mobile);
@@ -131,14 +153,36 @@ public class VerifyPhoneNumber extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        User users = new User(name, mobile, city);
+                        //set start date and expired date
+                        Date currentDate = new Date();
+                        System.out.println("Current time => " + currentDate);
+
+                        SimpleDateFormat df = new SimpleDateFormat("dd MM yyyy");
+                        String startDate = df.format(currentDate);
+
+                        Calendar c2 = Calendar.getInstance();
+                        c2.setTime(currentDate);
+                        c2.add(Calendar.DATE, 7);
+
+                        Date currentDatePlusOne = c2.getTime();
+
+                        String expiredDate = df.format(currentDatePlusOne);
+
+
+                        User users = new User(name, mobile, city, startDate, expiredDate, 0,
+                                0, driverVichel, 0);
+
                         mdatabase.child("Drivers").child(city).child(mobile).setValue(users);
 
                         //verification successful we will start the profile activity
-                        Intent intent = new Intent(VerifyPhoneNumber.this, MainActivity.class);
+                        Intent intent = new Intent(VerifyPhoneNumber.this, VerifyDeriver.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra("city",city);
+                        intent.putExtra("city", city);
+                        sharedPref.setPreferName(name);
+                        sharedPref.setPrefPhoneNumber(mobile);
+                        sharedPref.setPrefCity(city);
                         startActivity(intent);
+                        finish();
 
                     } else {
 

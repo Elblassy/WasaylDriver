@@ -2,31 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/message"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="message" />
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:elevation="35dp"
+        app:cardCornerRadius="25dp"
+        app:cardPreventCornerOverlap="false">
 
-    <EditText
-        android:id="@+id/rate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="rate" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="name" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="HIT here " />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:text="من فضلك قم بالاتصال على 01060279201 لكي تحصل على رمز التفعيل لحسابك او انتظر حتى يتصل بك احد مندوبونا"
+                android:textSize="11pt"
+                android:layout_margin="8dp"
+                android:padding="8dp" />
 
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edite_sign"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:hint="رمز التفعيل" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
+                android:background="@drawable/button"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:text="التأكد من رمز التفعيل" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

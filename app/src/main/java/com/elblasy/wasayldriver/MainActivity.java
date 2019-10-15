@@ -1,7 +1,5 @@
 package com.elblasy.wasayldriver;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,21 +10,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.elblasy.wasayldriver.adapter.ActiveOrderAdapter;
 import com.elblasy.wasayldriver.fragments.HomeFragment;
 import com.elblasy.wasayldriver.fragments.MyActiveOrder;
 import com.elblasy.wasayldriver.fragments.OrdersFragment;
+import com.elblasy.wasayldriver.utiles.LocaleUtils;
+import com.elblasy.wasayldriver.utiles.SharedPref;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,
-        OrdersFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity  {
 
 
     private ActionBar toolbar;
+    SharedPref sharedPref;
+
+    public MainActivity() {
+        LocaleUtils.updateConfig(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +43,22 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
         FirebaseApp.initializeApp(this);
 
+        String subscribeToTopic = SharedPref.getSessionValue("city").trim();
+        sharedPref = new SharedPref(this);
 
-        Intent intent = getIntent();
-        //String subscribeToTopic = intent.getStringExtra("city").trim();
-
-        FirebaseMessaging.getInstance().subscribeToTopic("portsaid");
+        FirebaseMessaging.getInstance().subscribeToTopic(subscribeToTopic);
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,
                 instanceIdResult -> {
                     String fcmToken = instanceIdResult.getToken();
+                    sharedPref.setPrefToken(fcmToken);
                     Log.e("token", fcmToken);
 
                 });
 
 
         // load the store fragment by default
-        toolbar.setTitle("HomeFragment");
+        toolbar.setTitle(getResources().getString(R.string.title_home));
         loadFragment(new HomeFragment());
 
     }
@@ -68,15 +71,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    toolbar.setTitle("Home");
+                    toolbar.setTitle(getResources().getString(R.string.title_home));
                     loadFragment(new HomeFragment());
                     return true;
                 case R.id.navigation_dashboard:
-                    toolbar.setTitle("Orders");
+                    toolbar.setTitle(getResources().getString(R.string.title_dashboard));
                     loadFragment(new OrdersFragment());
                     return true;
                 case R.id.navigation_notifications:
-                    toolbar.setTitle("Active Order");
+                    toolbar.setTitle(getResources().getString(R.string.title_Active));
                     loadFragment(new MyActiveOrder());
                     return true;
             }
@@ -92,9 +95,4 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         transaction.commit();
     }
 
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
