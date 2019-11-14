@@ -42,6 +42,7 @@ public class SplashScreen extends AppCompatActivity {
                 child("Drivers")
                 .child(SharedPref.getSessionValue("City"))
                 .child(SharedPref.getSessionValue("PhoneNumber"));
+
         if (auth.getCurrentUser() != null) {
             // Attach a listener to read the data at your profile reference
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -65,11 +66,11 @@ public class SplashScreen extends AppCompatActivity {
 
 
                 System.out.println("Splashhhhhhhhhhh " + verified);
-                if (verified == 1) {
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                if (verified == 0) {
+                    startActivity(new Intent(SplashScreen.this, VerifyDeriver.class));
                     finish();
                 } else {
-                    startActivity(new Intent(SplashScreen.this, VerifyDeriver.class));
+                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
                     finish();
                 }
             } else {

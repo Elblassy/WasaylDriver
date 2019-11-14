@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneNumber extends AppCompatActivity {
@@ -157,9 +158,10 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                         Date currentDate = new Date();
                         System.out.println("Current time => " + currentDate);
 
-                        SimpleDateFormat df = new SimpleDateFormat("dd MM yyyy");
+                        SimpleDateFormat df = new SimpleDateFormat("dd MM yyyy", new Locale("en"));
                         String startDate = df.format(currentDate);
 
+                        System.out.println("dateeeeeeeeeeeeee   " + startDate);
                         Calendar c2 = Calendar.getInstance();
                         c2.setTime(currentDate);
                         c2.add(Calendar.DATE, 7);
@@ -170,7 +172,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
 
 
                         User users = new User(name, mobile, city, startDate, expiredDate, 0,
-                                0, driverVichel, 0);
+                                0, driverVichel, 0,-132321);
 
                         mdatabase.child("Drivers").child(city).child(mobile).setValue(users);
 

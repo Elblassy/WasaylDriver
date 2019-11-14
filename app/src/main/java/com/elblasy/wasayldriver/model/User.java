@@ -3,14 +3,14 @@ package com.elblasy.wasayldriver.model;
 public class User {
 
     private String username, mobile, city, startDate, expiredDate;
-    private int rating, ordersCompleted, driverVichel, verified;
+    private int rating, ordersCompleted, driverVichel, verified,verificationCode;
 
 
     public User() {
     }
 
     public User(String username, String mobile, String city, String startDate, String expiredDate,
-                int rating, int ordersCompleted, int driverVichel, int verified) {
+                int rating, int ordersCompleted, int driverVichel, int verified,int verificationCode) {
         this.username = username;
         this.mobile = mobile;
         this.city = city;
@@ -20,6 +20,15 @@ public class User {
         this.ordersCompleted = ordersCompleted;
         this.driverVichel = driverVichel;
         this.verified = verified;
+        this.verificationCode = verificationCode;
+    }
+
+    public int getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(int verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     public int getVerified() {

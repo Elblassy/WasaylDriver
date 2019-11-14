@@ -1,11 +1,48 @@
 <resources>
 
+
+
+    <!-- Rating bar -->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorAccent2</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="android:minHeight">12dip</item>
+        <item name="android:minWidth">18dip</item>
+    </style>
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:titleTextStyle">@style/myTheme.ActionBar.Text</item>-->
+        <!--<item name="android:windowLightStatusBar" tools:targetApi="23">true</item>-->
+
     </style>
+
+    <!--<style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.Dark">-->
+    <!--<item name="android:textColorSecondary">@color/colorAccent2</item>-->
+    <!--</style>-->
+
+    <!--<style name="myTheme.ActionBar.Text" parent="@android:style/TextAppearance">-->
+    <!--<item name="android:textColor">@color/colorAccent2</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:titleTextStyle">@style/myTheme.ActionBar.Text</item>-->
+
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="splash.screen" parent="Theme.AppCompat.NoActionBar" />
+
 
 </resources>

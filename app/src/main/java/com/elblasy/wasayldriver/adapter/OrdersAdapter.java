@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class OrdersAdapter extends BaseAdapter {
 
@@ -29,7 +30,7 @@ public class OrdersAdapter extends BaseAdapter {
     private View v;
     private ViewHolder holder;
 
-    private EditText name, message, rate;
+    private EditText time, cost;
 
     public OrdersAdapter(Context context, ArrayList<Orders> listforview) {
         super();
@@ -77,14 +78,14 @@ public class OrdersAdapter extends BaseAdapter {
         holder.address.setText(orders.getTo());
         holder.details.setText(orders.getPlaceName());
         holder.card.setOnClickListener(v -> {
-////            String token = orders.getToken();
-////            Intent intent = new Intent(context, SpeakToClient.class);
-////            intent.putExtra("token", token);
-////            intent.putExtra("userName",orders.getUserName());
-////            intent.putExtra("phoneNumber",orders.getPhoneNumber());
-////            intent.putExtra("placeName",orders.getPlaceName());
-////            context.startActivity(intent);
-//
+//            String token = orders.getToken();
+//            Intent intent = new Intent(context, SpeakToClient.class);
+//            intent.putExtra("token", token);
+//            intent.putExtra("userName",orders.getUserName());
+//            intent.putExtra("phoneNumber",orders.getPhoneNumber());
+//            intent.putExtra("placeName",orders.getPlaceName());
+//            context.startActivity(intent);
+
             myCustomAlertDialog(orders.getPlaceName(), orders.getPhoneNumber());
         });
 
@@ -101,15 +102,16 @@ public class OrdersAdapter extends BaseAdapter {
     private void myCustomAlertDialog(String placeName, String phoneNumber) {
 
         Dialog myDialog;
-        //implement custom dialog
+        //implement custom verify_dialog
         myDialog = new Dialog(context);
         myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        myDialog.setContentView(R.layout.dialog);
+        myDialog.setContentView(R.layout.take_odrder_dialog);
 
 
-        message = myDialog.findViewById(R.id.message);
+        time = myDialog.findViewById(R.id.time);
+        cost = myDialog.findViewById(R.id.cost);
 
-        Button button = myDialog.findViewById(R.id.button);
+        Button button = myDialog.findViewById(R.id.send);
 
         button.setOnClickListener(v -> {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("driversAgree")
@@ -118,17 +120,12 @@ public class OrdersAdapter extends BaseAdapter {
 
             HashMap<String, Object> hashMap = new HashMap<>();
 
-
-            int mRate = Integer.parseInt(rate.getText().toString());
-
-
-
-
             reference.push().setValue(hashMap);
 
             myDialog.dismiss();
         });
 
+        Objects.requireNonNull(myDialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
         myDialog.show();
     }
 }

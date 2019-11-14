@@ -22,28 +22,42 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:text="من فضلك قم بالاتصال على 01060279201 لكي تحصل على رمز التفعيل لحسابك او انتظر حتى يتصل بك احد مندوبونا"
-                android:textSize="11pt"
-                android:layout_margin="8dp"
-                android:padding="8dp" />
+                android:layout_height="wrap_content"
+                android:text="قم بإدخال الوقت الذي ستستغرقه فى توصيل الطلب ومبلغ التوصيل"
+                android:textSize="10pt"
+                android:padding="8dp"
+                android:textAlignment="center"
+                />
 
             <EditText
-                android:id="@+id/message"
+                android:id="@+id/cost"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/edite_sign"
                 android:layout_margin="8dp"
                 android:padding="4dp"
-                android:inputType="number"
                 android:maxLines="1"
-                android:hint="رمز التفعيل" />
+                android:digits="0123456789"
+                android:inputType="number"
+                android:maxLength="2"
+                android:hint="مبلغ التوصيل" />
+
+            <EditText
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/edite_sign"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:digits="123456789"
+                android:inputType="number"
+                android:maxLength="1"
+                android:hint="عدد الساعات" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10pt"
@@ -52,7 +66,7 @@
                 android:padding="4dp"
                 android:textColor="#FFF"
                 android:layout_gravity="center"
-                android:text="التأكد من رمز التفعيل" />
+                android:text="ارسال " />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
