@@ -118,7 +118,14 @@ public class OrdersAdapter extends BaseAdapter {
                     .child(phoneNumber)
                     .child(placeName);
 
+            String timeText = time.getText().toString();
+            String costText = cost.getText().toString();
+
             HashMap<String, Object> hashMap = new HashMap<>();
+
+            hashMap.put("name", "mohsen");
+            hashMap.put("cost", costText);
+            hashMap.put("time", timeText);
 
             reference.push().setValue(hashMap);
 
