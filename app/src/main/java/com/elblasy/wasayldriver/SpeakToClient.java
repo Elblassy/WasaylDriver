@@ -41,7 +41,7 @@ public class SpeakToClient extends AppCompatActivity {
 
     final String TAG = "NOTIFICATION TAG";
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
-    final private String serverKey = "key=" + "AAAAMgUYmxc:APA91bHLBfsU1MbJwOCcpW-6g5cg11cQZ901bbPVY83Dh2Td_Q79B7V-YDchmdg4qC9S92TRLPjRnxArXCySyZ1Pw4QNQlZHI4q_iNVeHlMcGltltCrMjEZFqBpblE1J_ECPkDiS0AiP";
+    final private String serverKey = "key=" + "your key";
     final private String contentType = "application/json";
 
 
